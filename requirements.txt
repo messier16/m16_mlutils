@@ -1,3 +1,5 @@
+coverage
+codecov
 numpy
 pandas
 scikit-learn

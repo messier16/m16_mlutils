@@ -30,6 +30,15 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "setup.py" }}-{{ checksum "requirements.txt" }}
 
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            make test
+            codecov
+      - store_artifacts:
+          path: htmlcov/
+
   deploy:
     docker:
       - image: circleci/python:3.6
