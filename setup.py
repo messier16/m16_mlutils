@@ -13,7 +13,7 @@ from setuptools import setup
 from setuptools.command.install import install
 
 # Package version
-VERSION = "0.0.4"
+VERSION = "0.1.0"
 
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
@@ -33,7 +33,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="m16_mlutils",
-    version="0.0.1",
+    version=VERSION,
     author="Antonio Feregrino",
     author_email="antonio.feregrino@gmail.com",
     description="Some stuff that is probably better implemented somewhere else but I'm still a newbie to find out where...",
