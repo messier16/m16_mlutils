@@ -13,7 +13,7 @@ from setuptools import setup
 from setuptools.command.install import install
 
 # Package version
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
@@ -23,7 +23,7 @@ class VerifyVersionCommand(install):
         tag = os.getenv('CIRCLE_TAG')
 
         if tag != VERSION:
-            info = "Git tag: {0} does not match the version of this app: {1}".format(
+            info = "Git tag: {0} does not match the version of this library: {1}".format(
                 tag, VERSION
             )
             sys.exit(info)
