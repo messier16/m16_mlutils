@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from  m16_mlutils.datatools.DataDescription import DataDescription
+from  m16_mlutils.datatools import DataDescription
 
 doc = """MSSubClass: Identifies the type of dwelling involved in the sale.	
 
