@@ -1,6 +1,7 @@
 coverage
 codecov
 numpy
+scipy
 pandas
 scikit-learn
 twine
