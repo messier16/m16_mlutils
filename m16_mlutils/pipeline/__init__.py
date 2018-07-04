@@ -1,1 +1,3 @@
 from .DataFrameSelector import DataFrameSelector
+from .MostFrequentImputer import MostFrequentImputer
+from .CategoryEncoder import CategoryEncoder
