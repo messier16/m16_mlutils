@@ -92,7 +92,7 @@ class test_DataDescription(TestCase):
         data = DataDescription(doc)
         actual = data.get_description("SaleCondition")
 
-        self.assertEquals(expected, actual)
+        self.assertEqual(expected, actual)
 
 
         
