@@ -22,7 +22,6 @@ jobs:
           name: install dependencies
           command: |
             pipenv install --dev
-            pipenv shell
 
       - save_cache:
           paths:
@@ -51,7 +50,6 @@ jobs:
           name: install python dependencies
           command: |
             pipenv install --dev
-            pipenv shell
       - save_cache:
           key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Pipfile.lock" }}
           paths:
@@ -60,7 +58,6 @@ jobs:
       - run:
           name: verify git tag vs. version
           command: |
-            pipenv shell
             python setup.py verify
       - run:
           name: init .pypirc
@@ -75,8 +72,7 @@ jobs:
       - run:
           name: upload to pypi
           command: |
-            pipenv shell
-            twine upload dist/*
+            pipenv run twine upload dist/*
 workflows:
   version: 2
   build_and_deploy:
