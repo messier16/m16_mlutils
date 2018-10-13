@@ -31,9 +31,8 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv sell
             make test
-            codecov
+            pipenv run codecov
       - store_artifacts:
           path: htmlcov/
 
