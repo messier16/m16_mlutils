@@ -1,13 +1,13 @@
-from .NumPyTestCase import NumPyTestCase
 import pandas as pd
-import numpy as np
 
 from m16_mlutils.pipeline import CategoryEncoder
+from .NumPyTestCase import NumPyTestCase
+
 
 class test_CategoryEncoder(NumPyTestCase):
 
     def test_two_categories(self):
-        categoricalValues = ['s', 'n', 's','s']
+        categoricalValues = ['s', 'n', 's', 's']
         expected = self.array([
             [0, 1],
             [1, 0],
@@ -22,9 +22,9 @@ class test_CategoryEncoder(NumPyTestCase):
         }))
 
         self.assertArrayEqual(expected, actual)
-    
+
     def test_three_categories_custom_unobserved_labels(self):
-        categoricalValues = ['s', 'n', 's','s']
+        categoricalValues = ['s', 'n', 's', 's']
         expected = self.array([
             [0, 0, 1],
             [0, 1, 0],
@@ -79,4 +79,3 @@ class test_CategoryEncoder(NumPyTestCase):
         }))
 
         self.assertArrayEqual(expected, actual)
-

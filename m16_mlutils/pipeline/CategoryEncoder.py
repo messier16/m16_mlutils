@@ -1,16 +1,13 @@
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.utils.validation import check_X_y, check_is_fitted, check_array
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.exceptions import FitFailedWarning
-
-
-
 import numpy as np
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.exceptions import FitFailedWarning
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.utils.validation import check_array
+
 
 class CategoryEncoder(BaseEstimator, TransformerMixin):
-    def __init__(self, labels = None):
+    def __init__(self, labels=None):
         self.labels = labels
         self.label_encoders = {}
         self.one_hot_encoders = {}
@@ -25,10 +22,11 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         check_array(X, dtype=str)
         if type(X) != pd.DataFrame:
-            raise FitFailedWarning('You are not supposed to use this with other thing that is not a pandas DataFrame')
+            raise FitFailedWarning(
+                'You are not supposed to use this with other thing that is not a pandas DataFrame')
         names = self.__find_names(X)
         for c in names:
-            try: 
+            try:
                 self.label_encoders[c] = LabelEncoder()
                 self.one_hot_encoders[c] = OneHotEncoder(sparse=False)
                 if self.labels is not None and c in self.labels:
@@ -36,18 +34,19 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
                     values = self.label_encoders[c].transform(self.labels[c])
                 else:
                     self.label_encoders[c].fit(X[c])
-                    values =  self.label_encoders[c].transform(X[c])
-                self.one_hot_encoders[c].fit(values.reshape(len(values),1))
+                    values = self.label_encoders[c].transform(X[c])
+                self.one_hot_encoders[c].fit(values.reshape(len(values), 1))
             except:
                 print("Error", c, type(c), type(X))
-            
+
         return self
 
     def transform(self, X):
         names = self.__find_names(X)
         one_hots = []
         for c in names:
-            values =  self.label_encoders[c].transform(X[c])
-            o = self.one_hot_encoders[c].transform(values.reshape(len(values),1))
+            values = self.label_encoders[c].transform(X[c])
+            o = self.one_hot_encoders[c].transform(
+                values.reshape(len(values), 1))
             one_hots.append(o)
         return np.concatenate(one_hots, axis=1)
