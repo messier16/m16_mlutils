@@ -13,7 +13,7 @@ from setuptools import setup
 from setuptools.command.install import install
 
 # Package version
-VERSION = "0.3.0"
+VERSION = "0.4.1"
 
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
