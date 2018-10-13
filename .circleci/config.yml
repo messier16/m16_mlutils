@@ -16,24 +16,23 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "setup.py" }}-{{ checksum "requirements.txt" }}
+          - v1-dependencies-{{ checksum "setup.py" }}-{{ checksum "Pipfile.lock" }}
 
       - run:
           name: install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            make dev
+            pipenv install --dev
+            pipenv shell
 
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "setup.py" }}-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-{{ checksum "setup.py" }}-{{ checksum "Pipfile.lock" }}
 
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
+            pipenv sell
             make test
             codecov
       - store_artifacts:
@@ -46,24 +45,22 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "requirements.txt" }}
+          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Pipfile.lock" }}
 
       - run:
           name: install python dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            make dev
+            pipenv install --dev
+            pipenv shell
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "requirements.txt" }}
+          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
 
       - run:
           name: verify git tag vs. version
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
+            pipenv shell
             python setup.py verify
       - run:
           name: init .pypirc
@@ -78,7 +75,7 @@ jobs:
       - run:
           name: upload to pypi
           command: |
-            . venv/bin/activate
+            pipenv shell
             twine upload dist/*
 workflows:
   version: 2

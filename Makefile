@@ -10,8 +10,6 @@ help:
 clean:
 	rm -rf dist/*
 
-dev:
-	pip install -r requirements.txt
 
 #docs:
 #	$(MAKE) -C docs html
