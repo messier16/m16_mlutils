@@ -10,8 +10,6 @@ help:
 clean:
 	rm -rf dist/*
 
-dev:
-	pip install -r requirements.txt
 
 #docs:
 #	$(MAKE) -C docs html
@@ -21,5 +19,5 @@ package:
 	python setup.py bdist_wheel
 
 test:
-	coverage run -m unittest discover
-	coverage html
+	pipenv run coverage run -m unittest discover
+	pipenv run coverage html
