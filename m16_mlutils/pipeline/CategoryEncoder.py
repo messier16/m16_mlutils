@@ -26,18 +26,16 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
                 'You are not supposed to use this with other thing that is not a pandas DataFrame')
         names = self.__find_names(X)
         for c in names:
-            try:
-                self.label_encoders[c] = LabelEncoder()
-                self.one_hot_encoders[c] = OneHotEncoder(sparse=False)
-                if self.labels is not None and c in self.labels:
-                    self.label_encoders[c].fit(self.labels[c])
-                    values = self.label_encoders[c].transform(self.labels[c])
-                else:
-                    self.label_encoders[c].fit(X[c])
-                    values = self.label_encoders[c].transform(X[c])
-                self.one_hot_encoders[c].fit(values.reshape(len(values), 1))
-            except:
-                print("Error", c, type(c), type(X))
+            self.label_encoders[c] = LabelEncoder()
+            self.one_hot_encoders[c] = OneHotEncoder(sparse=False,
+                                                     categories='auto')
+            if self.labels is not None and c in self.labels:
+                self.label_encoders[c].fit(self.labels[c])
+                values = self.label_encoders[c].transform(self.labels[c])
+            else:
+                self.label_encoders[c].fit(X[c].astype(str))
+                values = self.label_encoders[c].transform(X[c].astype(str))
+            self.one_hot_encoders[c].fit(values.reshape(len(values), 1))
 
         return self
 
@@ -45,7 +43,7 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
         names = self.__find_names(X)
         one_hots = []
         for c in names:
-            values = self.label_encoders[c].transform(X[c])
+            values = self.label_encoders[c].transform(X[c].astype(str))
             o = self.one_hot_encoders[c].transform(
                 values.reshape(len(values), 1))
             one_hots.append(o)
