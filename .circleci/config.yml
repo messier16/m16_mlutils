@@ -77,10 +77,6 @@ workflows:
   build_and_deploy:
     jobs:
       - build:
-          branches:
-            only:
-              - master
-              - /issue-.*/
           filters:
             tags:
               only: /.*/
