@@ -18,8 +18,8 @@ def print_cm(cm, labels, **kwargs):
     for (i, j), z in np.ndenumerate(cm):
         ax.text(j, i, '{:0d}'.format(z), ha='center', va='center')
 
-    plt.xlabel("True label")
-    plt.ylabel("Predicted label")
+    plt.ylabel("True label")
+    plt.xlabel("Predicted label")
     ax.xaxis.set_label_position('top')
 
     ax.set_xticks(range(len(cm)))
