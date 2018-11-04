@@ -79,3 +79,21 @@ class test_CategoryEncoder(NumPyTestCase):
         }))
 
         self.assertArrayEqual(expected, actual)
+
+    def test_previously_unseen(self):
+        train = pd.DataFrame({
+            'l': ['a', 'b', 'c', 'a']
+        })
+
+        test = pd.DataFrame({
+            'l': ['z']
+        })
+
+        encoder = CategoryEncoder()
+
+        expected = self.array([[0,0,0]])
+
+        encoder.fit(train)
+        actual = encoder.transform(test)
+
+        self.assertArrayEqual(expected, actual)
