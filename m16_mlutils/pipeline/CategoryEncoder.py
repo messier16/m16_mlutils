@@ -43,8 +43,11 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
         names = self.__find_names(X)
         one_hots = []
         for c in names:
-            values = self.label_encoders[c].transform(X[c].astype(str))
-            o = self.one_hot_encoders[c].transform(
-                values.reshape(len(values), 1))
+            try:
+                values = self.label_encoders[c].transform(X[c].astype(str))
+                o = self.one_hot_encoders[c].transform(
+                    values.reshape(len(values), 1))
+            except (KeyError, ValueError):
+                o = np.zeros((1, len(self.label_encoders[c].classes_)))
             one_hots.append(o)
         return np.concatenate(one_hots, axis=1)
