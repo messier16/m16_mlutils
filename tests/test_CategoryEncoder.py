@@ -86,12 +86,15 @@ class test_CategoryEncoder(NumPyTestCase):
         })
 
         test = pd.DataFrame({
-            'l': ['z']
+            'l': ['z', 'y']
         })
 
         encoder = CategoryEncoder()
 
-        expected = self.array([[0,0,0]])
+        expected = self.array([
+            [0, 0, 0],
+            [0, 0, 0],
+        ])
 
         encoder.fit(train)
         actual = encoder.transform(test)
