@@ -3,7 +3,7 @@ import setuptools
 # -*- coding: utf-8 -*-
 # Based on: https://circleci.com/blog/continuously-deploying-python-packages-to-pypi-with-circleci/
 """
-:copyright: (c) 2018 by Antonio Feregrino
+:copyright: (c) 2019 by Antonio Feregrino
 :license: MIT, see LICENSE for more details.
 """
 import os
@@ -13,7 +13,7 @@ from setuptools import setup
 from setuptools.command.install import install
 
 # Package version
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
