@@ -1,11 +1,12 @@
+import unittest
+
 import pandas as pd
-import pytest
 
 from m16_mlutils.pipeline import CategoryEncoder
 from .NumPyTestCase import NumPyTestCase
 
 
-@pytest.mark.skip(reason="Something has gone weird with scikit-learn")
+@unittest.skip(reason="Something has gone weird with scikit-learn")
 class test_CategoryEncoder(NumPyTestCase):
 
     def test_two_categories(self):

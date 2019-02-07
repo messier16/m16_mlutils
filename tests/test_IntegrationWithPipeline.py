@@ -1,5 +1,5 @@
 import numpy as np
-import pytest
+import unittest
 import pandas as pd
 from sklearn.pipeline import Pipeline
 
@@ -7,7 +7,7 @@ from m16_mlutils.pipeline import CategoryEncoder, DataFrameSelector
 from .NumPyTestCase import NumPyTestCase
 
 
-@pytest.mark.skip(reason="Something has gone weird with scikit-learn")
+@unittest.skip(reason="Something has gone weird with scikit-learn")
 class test_IntegrationWithPipeline(NumPyTestCase):
 
     def test_pipeline(self):
