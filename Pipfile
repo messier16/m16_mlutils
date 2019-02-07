@@ -9,11 +9,11 @@ scipy = "*"
 pandas = "*"
 scikit-learn = "*"
 matplotlib = "*"
-twine = "*"
 
 [dev-packages]
-codecov = "*"
-coverage = "*"
+pytest = "*"
+pytest-cov = "*"
+twine = "*"
 
 [requires]
 python_version = "3.6"

@@ -19,5 +19,4 @@ package:
 	python setup.py bdist_wheel
 
 test:
-	pipenv run coverage run -m unittest discover
-	pipenv run coverage html
+	pipenv run pytest --cov
