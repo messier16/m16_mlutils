@@ -1,5 +1,3 @@
-from unittest import TestCase
-
 from m16_mlutils.datatools import DataDescription
 
 doc = """MSSubClass: Identifies the type of dwelling involved in the sale.	
@@ -76,21 +74,18 @@ SaleCondition: Condition of sale
 """
 
 
-class test_DataDescription(TestCase):
+def test_has_six_keys():
+    expected = 6
 
-    def test_has_six_keys(self):
-        expected = 6
+    data = DataDescription(doc)
+    keys = data.get_keys("MSSubClass")
+    actual = len(keys)
+    assert expected == actual
 
-        data = DataDescription(doc)
-        keys = data.get_keys("MSSubClass")
-        actual = len(keys)
 
-        self.assertEqual(expected, actual)
+def test_has_description():
+    expected = "Condition of sale"
 
-    def test_has_description(self):
-        expected = "Condition of sale"
-
-        data = DataDescription(doc)
-        actual = data.get_description("SaleCondition")
-
-        self.assertEqual(expected, actual)
+    data = DataDescription(doc)
+    actual = data.get_description("SaleCondition")
+    assert expected == actual

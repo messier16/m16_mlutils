@@ -32,7 +32,6 @@ jobs:
           name: run tests
           command: |
             make test
-            pipenv run codecov
       - store_artifacts:
           path: htmlcov/
 

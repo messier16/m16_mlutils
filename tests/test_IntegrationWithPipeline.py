@@ -1,13 +1,12 @@
-import numpy as np
-import unittest
 import pandas as pd
+import pytest
 from sklearn.pipeline import Pipeline
 
 from m16_mlutils.pipeline import CategoryEncoder, DataFrameSelector
 from .NumPyTestCase import NumPyTestCase
 
 
-@unittest.skip(reason="Something has gone weird with scikit-learn")
+@pytest.mark.skip("Something has gone weird with scikit-learn")
 class test_IntegrationWithPipeline(NumPyTestCase):
 
     def test_pipeline(self):
