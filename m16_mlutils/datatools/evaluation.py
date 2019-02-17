@@ -17,9 +17,12 @@ def get_metrics(true_labels, predicted_labels, avg='macro'):
     return metrics
 
 
-def eval_summary(true_labels, predicted_labels, avg='macro'):
+def eval_summary(true_labels, predicted_labels, avg='macro', need_matrix=False):
     summary = get_metrics(true_labels, predicted_labels, avg=avg)
     report = classification_report(true_labels, predicted_labels)
-    matrix = confusion_matrix(true_labels, predicted_labels)
+    if need_matrix:
+        matrix = confusion_matrix(true_labels, predicted_labels)
+    else:
+        matrix = None
 
     return summary, report, matrix
