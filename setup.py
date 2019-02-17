@@ -13,7 +13,7 @@ import sys
 from setuptools.command.install import install
 
 # Package version
-VERSION = "0.7.0"
+VERSION = "0.7.1"
 
 
 class VerifyVersionCommand(install):
