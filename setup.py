@@ -1,5 +1,6 @@
 import setuptools
-#!/usr/bin/env python
+
+# !/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Based on: https://circleci.com/blog/continuously-deploying-python-packages-to-pypi-with-circleci/
 """
@@ -9,11 +10,11 @@ import setuptools
 import os
 import sys
 
-from setuptools import setup
 from setuptools.command.install import install
 
 # Package version
-VERSION = "0.6.0"
+VERSION = "0.6.3"
+
 
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
@@ -22,11 +23,12 @@ class VerifyVersionCommand(install):
     def run(self):
         tag = os.getenv('CIRCLE_TAG')
 
-        if tag != VERSION:
+        if tag != f'v{VERSION}':
             info = "Git tag: {0} does not match the version of this library: {1}".format(
                 tag, VERSION
             )
             sys.exit(info)
+
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
